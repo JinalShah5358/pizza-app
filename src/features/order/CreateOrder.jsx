@@ -46,21 +46,21 @@ function CreateOrder() {
       <Form method="POST">
         <div>
           <label>First Name</label>
-          <input type="text" name="customer" required />
+          <input className="input" type="text" name="customer" required />
         </div>
 
         <div>
           <label>Phone number</label>
           <div>
-            <input type="tel" name="phone" required />
+            <input className="input" type="tel" name="phone" required />
           </div>
           {formError?.phone && <p>{formError.phone}</p>}
         </div>
 
         <div>
-          <label>Address</label>
+          <label>Address 1</label>
           <div>
-            <input type="text" name="address" required />
+            <input className="input" type="text" name="address"  required />
           </div>
         </div>
 
@@ -69,6 +69,7 @@ function CreateOrder() {
             type="checkbox"
             name="priority"
             id="priority"
+            className="h-6 w-6 accent-yellow-400  focus:outline-none focus:ring focus:ring-yellow-400 focus:ring-offset-2"
             // value={withPriority}
             // onChange={(e) => setWithPriority(e.target.checked)}
           />
@@ -76,8 +77,11 @@ function CreateOrder() {
         </div>
 
         <div>
-          <button disabled={isSubmitting}>
+          <button disabled={isSubmitting} className="bg-yellow-400 text-stone-800 rounded-full px-4 py-3 inline-block font-semibold tracking-wide uppercase
+          hover:bg-yellow-300 transition-colors duration-300 focus:bg-yellow-300 focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-2
+          disabled:cursor-not-allowed"  >
             {isSubmitting ? "Placing Order" : "Order now"}
+
           </button>
         </div>
         <input type="hidden" name="cart" value={JSON.stringify(cart)} />
