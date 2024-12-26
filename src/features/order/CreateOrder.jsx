@@ -50,7 +50,7 @@ function CreateOrder() {
         </div>
 
         <div>
-          <label>Phone number 123</label>
+          <label>Phone number jinal</label>
           <div>
             <input className="input" type="tel" name="phone" required />
           </div>
