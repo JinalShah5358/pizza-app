@@ -1,14 +1,17 @@
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import Button from '../../ui/Button';
 import { formatCurrency } from '../../utils/helpers';
-import { addItem } from '../cart/cartSlice';
+import { addItem, getQtyByID } from '../cart/cartSlice';
+import DeleteItem from '../cart/DeleteItem';
 
 function MenuItem({ pizza }) {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
   const dispatch = useDispatch()
+  const currentQty = useSelector(getQtyByID(id))
+  const isInCart = currentQty > 0
 
   const handleOnClick = ()=>{
-    console.log(id)
+    // console.log(id)
     const newItem = {
       pizzaId : id,
       name,
@@ -18,6 +21,7 @@ function MenuItem({ pizza }) {
     }
     dispatch(addItem(newItem))
   }
+  console.log(currentQty)
 
   return (
     <li className="flex gap-4 py-2">
@@ -39,8 +43,8 @@ function MenuItem({ pizza }) {
               Sold out
             </p>
           )}
-
-          {!soldOut && <Button type="small" OnClick={handleOnClick}>Add to cart</Button>}
+          {isInCart && <DeleteItem id={id} />}
+          {!soldOut && !isInCart && (<Button type="small" OnClick={handleOnClick}>Add to cart</Button>)}
         </div>
       </div>
     </li>
