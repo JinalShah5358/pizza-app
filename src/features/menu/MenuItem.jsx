@@ -3,25 +3,26 @@ import Button from '../../ui/Button';
 import { formatCurrency } from '../../utils/helpers';
 import { addItem, getQtyByID } from '../cart/cartSlice';
 import DeleteItem from '../cart/DeleteItem';
+import UpdateItemQty from '../cart/UpdateItemQty';
 
 function MenuItem({ pizza }) {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
-  const dispatch = useDispatch()
-  const currentQty = useSelector(getQtyByID(id))
-  const isInCart = currentQty > 0
+  const dispatch = useDispatch();
+  const currentQty = useSelector(getQtyByID(id));
+  const isInCart = currentQty > 0;
 
-  const handleOnClick = ()=>{
+  const handleOnClick = () => {
     // console.log(id)
     const newItem = {
-      pizzaId : id,
+      pizzaId: id,
       name,
-      quantity:1,
+      quantity: 1,
       unitPrice,
-      totalPrice:unitPrice * 1
-    }
-    dispatch(addItem(newItem))
-  }
-  console.log(currentQty)
+      totalPrice: unitPrice * 1,
+    };
+    dispatch(addItem(newItem));
+  };
+  console.log(currentQty);
 
   return (
     <li className="flex gap-4 py-2">
@@ -43,8 +44,17 @@ function MenuItem({ pizza }) {
               Sold out
             </p>
           )}
-          {isInCart && <DeleteItem id={id} />}
-          {!soldOut && !isInCart && (<Button type="small" OnClick={handleOnClick}>Add to cart</Button>)}
+          {isInCart && (
+            <div className="flex items-center gap-3 sm:gap-8">
+              <UpdateItemQty id={id} currentQty={currentQty} />
+              <DeleteItem id={id} />
+            </div>
+          )}
+          {!soldOut && !isInCart && (
+            <Button type="small" OnClick={handleOnClick}>
+              Add to cart
+            </Button>
+          )}
         </div>
       </div>
     </li>

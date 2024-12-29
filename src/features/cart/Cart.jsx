@@ -6,18 +6,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { clearCart, getCart } from './cartSlice';
 import EmptyCart from './EmptyCart';
 
-
 function Cart() {
   const cart = useSelector(getCart);
-  const username = useSelector((state) => state.user.username)
-  const dispatch = useDispatch()
+  const username = useSelector((state) => state.user.username);
+  const dispatch = useDispatch();
 
+  const handleonClickCleatCart = () => {
+    dispatch(clearCart());
+  };
 
-  const handleonClickCleatCart= () =>{
-    dispatch(clearCart())
-  }
-
-if(cart.length === 0) return <EmptyCart />
+  if (cart.length === 0) return <EmptyCart />;
 
   return (
     <div className="px-4 py-3">
@@ -27,7 +25,7 @@ if(cart.length === 0) return <EmptyCart />
 
       <ul className="mt-3 divide-y divide-stone-200 border-b">
         {cart.map((item) => (
-          <CartItem item={item} key={item.key} />
+          <CartItem item={item} key={item.pizzaId} />
         ))}
       </ul>
 
@@ -36,7 +34,9 @@ if(cart.length === 0) return <EmptyCart />
           Order pizzas
         </Button>
 
-        <Button type="secondary" OnClick={handleonClickCleatCart}>Clear cart</Button>
+        <Button type="secondary" OnClick={handleonClickCleatCart}>
+          Clear cart
+        </Button>
       </div>
     </div>
   );
