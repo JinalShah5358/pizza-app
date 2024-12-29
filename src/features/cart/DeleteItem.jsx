@@ -1,14 +1,15 @@
-import { useDispatch } from "react-redux"
-import { deleteItem } from "./cartSlice"
-import Button from "../../ui/Button"
+import { useDispatch } from 'react-redux';
+import Button from '../../ui/Button';
+import { deleteItem } from './cartSlice';
 
-function DeleteItem({id}) {
-    console.log(id)
-    const dispatch = useDispatch()
-    return (
-        <Button type="small" OnClick={() => dispatch(deleteItem(id))}>Delete</Button>
+function DeleteItem({ pizzaId }) {
+  const dispatch = useDispatch();
 
-    )
+  return (
+    <Button type="small" onClick={() => dispatch(deleteItem(pizzaId))}>
+      Delete
+    </Button>
+  );
 }
 
-export default DeleteItem
+export default DeleteItem;
